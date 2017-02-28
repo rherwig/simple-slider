@@ -1,0 +1,9 @@
+# IntelliJ
+.idea
+
+# Project
+node_modules
+build
+
+# OS
+thumbs.db
