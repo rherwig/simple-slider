@@ -13,6 +13,6 @@ async function init(options = {}) {
     });
 }
 
-init({
-    cycle: true
-});
+global.simpleSlider = {
+    init
+};

@@ -35,7 +35,8 @@ export default {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: join(__dirname, '..', 'src', 'index.html')
+            template: join(__dirname, '..', 'src', 'index.html'),
+            inject: 'head'
         })
     ]
 };
