@@ -36,9 +36,19 @@ export default class Slider {
             $nextSlide = this.slides.lastElementChild;
         }
 
-        const nextSlideIndex = Array.from(this.slides.children).indexOf($nextSlide);
+        const slidesArray = Array.from(this.slides.children);
+        const nextSlideIndex = slidesArray.indexOf($nextSlide);
+        const activeSlideIndex = slidesArray.indexOf($activeSlide);
 
         toggleSlide($activeSlide, $nextSlide);
+
+        this.ref.dispatchEvent(new CustomEvent('next', {
+            detail: {
+                fromSlide: activeSlideIndex,
+                toSlide: nextSlideIndex
+            }
+        }));
+
         return this.slideTo(nextSlideIndex);
     }
 
@@ -56,9 +66,19 @@ export default class Slider {
             $nextSlide = this.slides.firstElementChild;
         }
 
-        const nextSlideIndex = Array.from(this.slides.children).indexOf($nextSlide);
+        const slidesArray = Array.from(this.slides.children);
+        const nextSlideIndex = slidesArray.indexOf($nextSlide);
+        const activeSlideIndex = slidesArray.indexOf($activeSlide);
 
         toggleSlide($activeSlide, $nextSlide);
+
+        this.ref.dispatchEvent(new CustomEvent('previous', {
+            detail: {
+                fromSlide: activeSlideIndex,
+                toSlide: nextSlideIndex
+            }
+        }));
+
         return this.slideTo(nextSlideIndex);
     }
 
@@ -77,5 +97,9 @@ export default class Slider {
             return resolve();
         });
     });
+
+    addEventListener(event, callback) {
+        this.ref.addEventListener(event, callback);
+    }
 
 }
