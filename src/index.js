@@ -1,18 +1,15 @@
 import './styles/main.scss';
 
-import { setOptions } from './core/options';
-import previousSlide from './core/previousSlide';
-import nextSlide from './core/nextSlide';
+import Slider from './core/slider';
 
-async function init(options = {}) {
-    setOptions(options);
+async function init($slider, options = {}) {
+    return new Slider($slider, options);
+}
 
-    Array.from(document.querySelectorAll('.slider')).forEach((slider) => {
-        slider.querySelector('.prev-arrow').addEventListener('click', previousSlide.bind(slider.querySelector('.slides')));
-        slider.querySelector('.next-arrow').addEventListener('click', nextSlide.bind(slider.querySelector('.slides')));
+async function initAll(options = {}) {
+    Array.from(document.querySelectorAll('.slider')).forEach(slider => {
+        new Slider(slider, options);
     });
 }
 
-global.simpleSlider = {
-    init
-};
+global.SimpleSlider = Slider;
